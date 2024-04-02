@@ -4,6 +4,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -11,10 +12,13 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -24,17 +28,22 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import coil.compose.AsyncImage
+import com.example.tp_2_exo2.presentation.profile.ProfileScreen
+import com.example.tp_2_exo2.presentation.sign_in.UserData
 
 @Composable
-fun parkingsListComposable(parkingsList: List<Parking>,navController : NavHostController){
+fun ParkingsListComposable(parkingsList: List<Parking>,navController : NavHostController){
 
     LazyColumn(horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.SpaceEvenly, modifier =  Modifier.background(
-        Color.White) ){
+        Color.White).padding(4.dp,12.dp) ){
+
         items(parkingsList){
             Row(modifier = Modifier
                 .clip(RoundedCornerShape(15.dp))
@@ -66,6 +75,19 @@ fun parkingsListComposable(parkingsList: List<Parking>,navController : NavHostCo
             Spacer(modifier = Modifier.height(10.dp))
         }
     }
+
+    Spacer(modifier = Modifier.padding(48.dp))
+
+    Column(
+        modifier = Modifier.fillMaxSize(),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Button(onClick = {
+            navController.navigate(ParkingDestination.Profile.route)
+        }) {
+            Text(text = "Show Profile")
+        }
+    }
 }
 
 @Composable
@@ -93,12 +115,18 @@ fun ParkingDetails(parking:Parking){
 }
 
 @Composable
-fun ParkingNavigation(parkingsList: List<Parking>,navController : NavHostController){
+fun ParkingNavigation(
+    parkingsList: List<Parking>,
+    userData: UserData?,
+    onSignOut : () -> Unit ,
+    navController : NavHostController){
+
     NavHost(navController = navController, startDestination = "parkingsList"){
-        composable(ParkingDestination.ParkingsList.route){ parkingsListComposable(parkingsList,navController)}
+        composable(ParkingDestination.Profile.route){ ProfileScreen(userData = userData , onSignOut=onSignOut)}
+        composable(ParkingDestination.ParkingsList.route){ ParkingsListComposable(parkingsList,navController)}
         composable(ParkingDestination.ParkingDetails.route){
                 navBack ->
-            val id = navBack?.arguments?.getString("ParkingId")?.toInt()
+            val id = navBack.arguments?.getString("ParkingId")?.toInt()
             ParkingDetails(parkingsList[id!!])
         }
     }
