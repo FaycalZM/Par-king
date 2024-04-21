@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">TP_2_EXO2</string>
     <string name="web_client_id">368519734768-1vmhr54231rhgj74en4ap398dp8a2j23.apps.googleusercontent.com</string>
+    <string name="hello_header">Hey there,</string>
+    <string name="signup_heading">Create an Account</string>
+    <string name="signin_heading">Welcome Back</string>
+    <string name="accept_terms_and_conditions">By continuing you accept our privacy policy and terms of use</string>
 </resources>
