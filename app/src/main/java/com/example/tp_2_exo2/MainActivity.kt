@@ -19,9 +19,11 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.tp_2_exo2.presentation.sign_in.GoogleAuthUiClient
-import com.example.tp_2_exo2.presentation.sign_in.SignInScreen
-import com.example.tp_2_exo2.presentation.sign_in.SignInViewModel
+import com.example.tp_2_exo2.data.model.Parking
+import com.example.tp_2_exo2.data.utils.GoogleAuthUiClient
+import com.example.tp_2_exo2.ui.screens.SignInScreen
+import com.example.tp_2_exo2.data.model.SignInViewModel
+import com.example.tp_2_exo2.ui.navigation.ParkingNavigation
 import com.example.tp_2_exo2.ui.theme.TP_2_EXO2Theme
 import com.google.android.gms.auth.api.identity.Identity
 import kotlinx.coroutines.launch
@@ -48,8 +50,9 @@ class MainActivity : ComponentActivity() {
                         composable("sign_in") {
                             val viewModel = viewModel<SignInViewModel>()
                             val state by viewModel.state.collectAsStateWithLifecycle()
-                            //val state by viewModel.state.collectAsStateWithLifecycle()
 
+
+                            // if the user is already logged in : go directly to the profile screen
                             LaunchedEffect(key1 = Unit) {
                                 if(googleAuthUiClient.getSignedInUser() != null) {
                                     navController.navigate("profile")
@@ -70,6 +73,9 @@ class MainActivity : ComponentActivity() {
                                 }
                             )
 
+
+                            // when the user is signed in successfully : display a Toast and
+                            // navigate to the profile screen
                             LaunchedEffect(key1 = state.isSignInSuccessful) {
                                 if(state.isSignInSuccessful) {
                                     Toast.makeText(
@@ -134,4 +140,5 @@ class MainActivity : ComponentActivity() {
     }
 }
 }
+
 

@@ -1,9 +1,11 @@
-package com.example.tp_2_exo2.presentation.sign_in
+package com.example.tp_2_exo2.data.utils
 
 import android.content.Context
 import android.content.Intent
 import android.content.IntentSender
 import com.example.tp_2_exo2.R
+import com.example.tp_2_exo2.data.model.SignInResult
+import com.example.tp_2_exo2.data.model.UserData
 import com.google.android.gms.auth.api.identity.BeginSignInRequest
 import com.google.android.gms.auth.api.identity.BeginSignInRequest.GoogleIdTokenRequestOptions
 import com.google.android.gms.auth.api.identity.SignInClient
