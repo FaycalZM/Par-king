@@ -18,8 +18,8 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import com.example.tp_2_exo2.R
 import com.example.tp_2_exo2.data.model.SignInState
 import com.example.tp_2_exo2.ui.composables.ButtonComponent
@@ -35,7 +35,8 @@ import com.example.tp_2_exo2.ui.theme.White
 @Composable
 fun SignInScreen(
     state: SignInState,
-    onSignInClick: () -> Unit
+    onSignInClick: () -> Unit,
+    homeNavController: NavHostController
 ) {
     val context = LocalContext.current
     LaunchedEffect(key1 = state.signInError) {
@@ -92,7 +93,8 @@ fun SignInScreen(
             Spacer(modifier = Modifier.padding(0.dp,8.dp))
             ClickableLoginTextComponent(
                 initialText = "Don't have an account yet? ",
-                clickableText = "Register"
+                clickableText = "Register",
+                homeNavController = homeNavController
             )
         }
     }
