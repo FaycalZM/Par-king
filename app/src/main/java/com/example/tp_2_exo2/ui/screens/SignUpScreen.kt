@@ -16,8 +16,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import com.example.tp_2_exo2.R
 import com.example.tp_2_exo2.data.model.SignInState
 import com.example.tp_2_exo2.ui.composables.ButtonComponent
@@ -36,7 +36,8 @@ import com.example.tp_2_exo2.ui.theme.White
 @Composable
 fun SignUpScreen(
     state: SignInState,
-    onSignInClick: () -> Unit
+    onSignInClick: () -> Unit,
+    homeNavController: NavHostController
 ) {
     Surface(
         modifier = Modifier
@@ -91,7 +92,8 @@ fun SignUpScreen(
             Spacer(modifier = Modifier.padding(0.dp,8.dp))
             ClickableLoginTextComponent(
                 initialText = "Already have an account? ",
-                clickableText = "Login"
+                clickableText = "Login",
+                homeNavController = homeNavController
             )
         }
     }
