@@ -1,6 +1,7 @@
 package com.example.tp_2_exo2.ui.screens
 
 import android.annotation.SuppressLint
+import android.content.Context
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -19,54 +20,66 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
-import com.example.tp_2_exo2.data.model.Reservation
-import com.example.tp_2_exo2.ui.navigation.BottomNavigation
+import androidx.navigation.NavHostController
+import com.example.tp_2_exo2.data.model.ReservationData
+import com.example.tp_2_exo2.ui.composables.BottomNavigation
+import com.example.tp_2_exo2.ui.navigation.routes.AuthDestination
 
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun ReservationsListScreen(
-    navController: NavController,
-    reservationsList: List<Reservation>
+    navController: NavHostController,
+    reservationsList: List<ReservationData> = emptyList<ReservationData>(),
 ) {
-    Scaffold(
-        bottomBar = {
-            BottomNavigation(navController = navController)
-        }
-    ) {
-        LazyColumn(
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.SpaceEvenly,
-            modifier = Modifier
-                .background(
-                    Color.White
-                )
-                .padding(4.dp, 12.dp, 4.dp, 80.dp)
+    val context = LocalContext.current
+    val sharedPreferences = context.getSharedPreferences("my_prefs", Context.MODE_PRIVATE)
+    val email = sharedPreferences.getString("email" , null)
+    if (email == null) {
+        // user is not authenticated
+        navController.navigate(AuthDestination.SignIn.route)
+    }
+    else {
+        Scaffold(
+            bottomBar = {
+                BottomNavigation(navController = navController)
+            }
         ) {
-            items(reservationsList) {
-                Row(
-                    modifier = Modifier
-                        .clip(RoundedCornerShape(15.dp))
-                        .background(Color.Gray)
-                        .height(175.dp)
-                        .width(375.dp)
-                        .padding(10.dp),
-                    horizontalArrangement = Arrangement.Start,
-                    verticalAlignment = Alignment.CenterVertically
-                )
-                {
-                    Column {
-                        Text(text = it.parking, color = Color.White, fontWeight = FontWeight.Bold)
-                        Spacer(modifier = Modifier.height(5.dp))
-                        Text(text = it.user, color = Color.White)
-                        Spacer(modifier = Modifier.height(5.dp))
+            LazyColumn(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.SpaceEvenly,
+                modifier = Modifier
+                    .background(
+                        Color.White
+                    )
+                    .padding(4.dp, 12.dp, 4.dp, 80.dp)
+            ) {
+                items(reservationsList) {
+                    Row(
+                        modifier = Modifier
+                            .clip(RoundedCornerShape(15.dp))
+                            .background(Color.Gray)
+                            .height(175.dp)
+                            .width(375.dp)
+                            .padding(10.dp),
+                        horizontalArrangement = Arrangement.Start,
+                        verticalAlignment = Alignment.CenterVertically
+                    )
+                    {
+                        Column {
+                            Text(text = it.parking, color = Color.White, fontWeight = FontWeight.Bold)
+                            Spacer(modifier = Modifier.height(5.dp))
+                            Text(text = it.user, color = Color.White)
+                            Spacer(modifier = Modifier.height(5.dp))
+                        }
                     }
+                    Spacer(modifier = Modifier.height(10.dp))
                 }
-                Spacer(modifier = Modifier.height(10.dp))
             }
         }
     }
+
 }

@@ -1,6 +1,5 @@
-package com.example.tp_2_exo2.ui.navigation
+package com.example.tp_2_exo2.ui.composables
 
-import android.util.Log
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
@@ -10,6 +9,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.painterResource
 import androidx.navigation.NavController
+import com.example.tp_2_exo2.ui.navigation.BottomNavItem
 
 @Composable
 fun BottomNavigation(

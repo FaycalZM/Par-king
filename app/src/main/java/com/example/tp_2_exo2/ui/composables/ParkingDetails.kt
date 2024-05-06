@@ -20,10 +20,10 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.tp_2_exo2.data.model.Parking
+import com.example.tp_2_exo2.data.model.ParkingData
 
 @Composable
-fun ParkingDetails(parking: Parking){
+fun ParkingDetails(parking: ParkingData){
     Column(
         modifier = Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -31,7 +31,7 @@ fun ParkingDetails(parking: Parking){
     ) {
         Image(
             painter = painterResource(id = parking.photo),
-            contentDescription = "photo de parking",
+            contentDescription = "parking_image",
             contentScale = ContentScale.Crop,
             modifier = Modifier
                 .height(300.dp)

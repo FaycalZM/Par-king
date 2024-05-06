@@ -25,7 +25,7 @@ import com.example.tp_2_exo2.ui.theme.poppinsFontFamily
 @Composable
 fun SignInIconBtn(
     textValue: String,
-    onSignInClick: () -> Unit
+    onSignInClick: () -> Unit = {}
 ) {
     IconButton(
         onClick = onSignInClick,

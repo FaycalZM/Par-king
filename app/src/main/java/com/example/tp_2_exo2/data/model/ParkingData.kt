@@ -2,7 +2,7 @@ package com.example.tp_2_exo2.data.model
 
 
 
-data class Parking(
+data class ParkingData(
     var id : Int,
     var nom : String,
     var capacite : String,

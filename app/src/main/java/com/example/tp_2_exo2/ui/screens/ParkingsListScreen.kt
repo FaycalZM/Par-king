@@ -1,4 +1,4 @@
-package com.example.tp_2_exo2.ui.composables
+package com.example.tp_2_exo2.ui.screens
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
@@ -25,14 +25,18 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import com.example.tp_2_exo2.data.model.ParkingData
+import com.example.tp_2_exo2.ui.composables.BottomNavigation
 import com.example.tp_2_exo2.ui.navigation.routes.ParkingDestination
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun ParkingsListComposable(parkingsList: List<ParkingData>, navController : NavHostController){
-
+fun ParkingsListScreen(
+    parkingsList: List<ParkingData> = emptyList<ParkingData>(),
+    navController: NavHostController
+) {
     Scaffold(
         bottomBar = {
             BottomNavigation(navController = navController)
@@ -70,7 +74,7 @@ fun ParkingsListComposable(parkingsList: List<ParkingData>, navController : NavH
                 {
                     Image(
                         painter = painterResource(id = it.photo),
-                        contentDescription = "photo de parking",
+                        contentDescription = "parking_image",
                         contentScale = ContentScale.Crop,
                         modifier = Modifier
                             .height(150.dp)
@@ -96,3 +100,9 @@ fun ParkingsListComposable(parkingsList: List<ParkingData>, navController : NavH
 
     }
 }
+
+//@Preview
+//@Composable
+//fun ParkingsListScreenPreview() {
+//    ParkingsListScreen()
+//}

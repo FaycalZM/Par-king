@@ -12,6 +12,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import com.example.tp_2_exo2.ui.navigation.routes.AuthDestination
 import com.example.tp_2_exo2.ui.theme.Primary
 import com.example.tp_2_exo2.ui.theme.poppinsFontFamily
 
@@ -19,7 +20,7 @@ import com.example.tp_2_exo2.ui.theme.poppinsFontFamily
 fun ClickableLoginTextComponent(
     initialText: String,
     clickableText: String,
-    homeNavController: NavHostController
+    navController: NavHostController
 ) {
 
 
@@ -43,12 +44,12 @@ fun ClickableLoginTextComponent(
             annotatedString.getStringAnnotations(offset, offset)
                 .firstOrNull()?.also { span ->
                     Log.d("ClickableTextComponent", "{${span.tag}}")
-                    if (span.tag == "Register") {
+                    if (span.tag.lowercase() == "register") {
                         // navigate to the SignUp screen
-                        homeNavController.navigate("sign_up")
-                    } else {
+                        navController.navigate(AuthDestination.SignUp.route)
+                    } else if (span.tag.lowercase() == "login") {
                         // navigate to the SignIn screen
-                        homeNavController.navigate("sign_in")
+                        navController.navigate(AuthDestination.SignIn.route)
                     }
                 }
         }

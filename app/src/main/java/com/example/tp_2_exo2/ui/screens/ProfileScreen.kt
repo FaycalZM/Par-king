@@ -1,37 +1,30 @@
 package com.example.tp_2_exo2.ui.screens
 
 import android.annotation.SuppressLint
+import android.content.Context
+import android.util.Log
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavHostController
-import coil.compose.AsyncImage
-import com.example.tp_2_exo2.data.model.UserData
-import com.example.tp_2_exo2.ui.navigation.BottomNavigation
+import com.example.tp_2_exo2.ui.composables.BottomNavigation
+import com.example.tp_2_exo2.ui.navigation.routes.AuthDestination
 
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun ProfileScreen(
-    userData: UserData?,
-    onSignOut: () -> Unit,
     navController: NavHostController
 ) {
 
     Scaffold(
         bottomBar = {
-            BottomNavigation(navController = navController)
+            BottomNavigation(navController = navController )
         }
     ) {
         Column(
@@ -39,29 +32,28 @@ fun ProfileScreen(
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            if(userData?.profilePictureUrl != null) {
-                AsyncImage(
-                    model = userData.profilePictureUrl,
-                    contentDescription = "Profile picture",
-                    modifier = Modifier
-                        .size(150.dp)
-                        .clip(CircleShape),
-                    contentScale = ContentScale.Crop
-                )
-                Spacer(modifier = Modifier.height(16.dp))
+            val context = LocalContext.current
+            val pref = context.getSharedPreferences("my_prefs", Context.MODE_PRIVATE)
+            val email = pref.getString("email" , null)
+            Log.d("Profile Screen", "ProfileScreen: $email ")
+            if (email != null) {
+                Text(text = email)
+                Button(onClick = {
+                    pref.edit().remove("email").apply()
+                    navController.navigate(AuthDestination.SignIn.route)
+                }) {
+                    Text(text = "Sign out")
+                }
             }
-            if(userData?.username != null) {
-                Text(
-                    text = userData.username,
-                    textAlign = TextAlign.Center,
-                    fontSize = 36.sp,
-                    fontWeight = FontWeight.SemiBold
-                )
-                Spacer(modifier = Modifier.height(16.dp))
+            else {
+                Text(text = "User is not authenticated!")
+                Button(onClick = {
+                    navController.navigate(AuthDestination.SignIn.route)
+                }) {
+                    Text(text = "Sign in")
+                }
             }
-            Button(onClick = onSignOut) {
-                Text(text = "Sign out")
-            }
+
         }
     }
 }

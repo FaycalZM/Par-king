@@ -8,6 +8,7 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
@@ -25,12 +26,10 @@ import com.example.tp_2_exo2.ui.theme.poppinsFontFamily
 fun InputField(
     label: String,
     painterResource: Painter,
-    contentDescription : String
+    contentDescription: String,
+    state: MutableState<String>,
+    onValueChange: (String) -> Unit,
 ) {
-    val textValue = remember {
-        mutableStateOf("")
-    }
-
     OutlinedTextField(
         modifier = Modifier
             .fillMaxWidth()
@@ -43,10 +42,8 @@ fun InputField(
             cursorColor = Primary
         ),
         keyboardOptions = KeyboardOptions.Default,
-        value = textValue.value,
-        onValueChange = {
-            textValue.value = it
-        },
+        value = state.value,
+        onValueChange = onValueChange,
         textStyle = TextStyle(
             fontSize = 18.sp,
             fontFamily = poppinsFontFamily,

@@ -1,8 +1,8 @@
-package com.example.tp_2_exo2.data.model
+package com.example.tp_2_exo2.data.model.auth
 
 import androidx.lifecycle.ViewModel
-import com.example.tp_2_exo2.data.model.SignInResult
-import com.example.tp_2_exo2.data.model.SignInState
+import com.example.tp_2_exo2.data.model.auth.SignInResult
+import com.example.tp_2_exo2.data.model.auth.SignInState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update

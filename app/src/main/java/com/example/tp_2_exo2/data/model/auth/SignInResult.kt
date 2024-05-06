@@ -1,4 +1,4 @@
-package com.example.tp_2_exo2.data.model
+package com.example.tp_2_exo2.data.model.auth
 
 data class SignInResult(
     val data: UserData?,

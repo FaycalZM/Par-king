@@ -1,6 +1,7 @@
 package com.example.tp_2_exo2.ui.navigation
 
 import com.example.tp_2_exo2.R
+import com.example.tp_2_exo2.ui.navigation.routes.ParkingDestination
 
 sealed class BottomNavItem(
     var title: String,
