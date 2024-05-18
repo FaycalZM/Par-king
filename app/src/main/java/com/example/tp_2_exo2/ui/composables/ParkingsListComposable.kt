@@ -35,7 +35,7 @@ fun ParkingsListComposable(parkingsList: List<ParkingData>, navController : NavH
 
     Scaffold(
         bottomBar = {
-            BottomNavigation(navController = navController)
+            BottomNavigationBar(navController = navController)
         }
     ) {
 

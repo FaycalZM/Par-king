@@ -7,8 +7,8 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
 import com.example.tp_2_exo2.data.model.auth.AuthViewModel
+import com.example.tp_2_exo2.data.model.user.UserModel
 import com.example.tp_2_exo2.ui.navigation.routes.AuthDestination
 import com.example.tp_2_exo2.ui.navigation.routes.ParkingDestination
 import com.example.tp_2_exo2.ui.screens.ParkingsListScreen
@@ -20,7 +20,8 @@ import com.example.tp_2_exo2.ui.screens.SignUpScreen
 @Composable
 fun AuthNavigation(
     navController: NavHostController,
-    authModel : AuthViewModel
+    authModel: AuthViewModel,
+    userModel: UserModel
 ) {
     NavHost(
         navController = navController,
@@ -45,7 +46,8 @@ fun AuthNavigation(
 
         composable(AuthDestination.SignUp.route) {
             SignUpScreen(
-                navController = navController
+                navController = navController,
+                userModel = userModel
             )
         }
 

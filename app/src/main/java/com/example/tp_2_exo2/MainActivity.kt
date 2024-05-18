@@ -41,7 +41,8 @@ class MainActivity : ComponentActivity() {
                     val navController = rememberNavController()
                     AuthNavigation(
                         navController = navController,
-                        authModel = authModel
+                        authModel = authModel,
+                        userModel = userModel
                     )
             }
         }

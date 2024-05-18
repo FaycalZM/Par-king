@@ -17,7 +17,6 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class AuthViewModel(private val userRepository: UserRepository) : ViewModel() {
-    val userPassword = mutableStateOf("")
 
     private var _loginState = mutableStateOf(AuthState())
     val loginState : State<AuthState> = _loginState

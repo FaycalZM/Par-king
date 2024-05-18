@@ -83,12 +83,9 @@ fun SignInScreen(
                     Toast.LENGTH_SHORT,
                     true
                 ).show()
-                Log.d("loginSuccess", "SignInScreen: navigating to Profile screen ...")
                 navController.navigate(ParkingDestination.ParkingsList.route)
             }
             else {
-                Log.d("invalid credentials", "SignInScreen: $userPassword")
-                Log.d("invalid credentials", "SignInScreen: $inputPassword")
                 Toasty.error(
                     context,
                     "Wrong credentials",

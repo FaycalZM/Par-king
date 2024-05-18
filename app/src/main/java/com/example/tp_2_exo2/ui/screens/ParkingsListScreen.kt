@@ -28,75 +28,21 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import com.example.tp_2_exo2.data.model.ParkingData
-import com.example.tp_2_exo2.ui.composables.BottomNavigation
+import com.example.tp_2_exo2.ui.composables.BottomNavigationBar
 import com.example.tp_2_exo2.ui.navigation.routes.ParkingDestination
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun ParkingsListScreen(
-    parkingsList: List<ParkingData> = emptyList<ParkingData>(),
     navController: NavHostController
 ) {
     Scaffold(
         bottomBar = {
-            BottomNavigation(navController = navController)
+            BottomNavigationBar(
+                navController = navController,
+            )
         }
     ) {
-
-        LazyColumn(
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.SpaceEvenly,
-            modifier = Modifier
-                .background(
-                    Color.White
-                )
-                .padding(4.dp, 12.dp,4.dp,80.dp)
-        ) {
-
-            items(parkingsList) {
-                Row(
-                    modifier = Modifier
-                        .clip(RoundedCornerShape(15.dp))
-                        .background(Color.Gray)
-                        .height(175.dp)
-                        .width(375.dp)
-                        .padding(10.dp)
-                        .clickable {
-                            navController.navigate(
-                                ParkingDestination.ParkingDetails.createRoute(
-                                    it.id
-                                )
-                            )
-                        },
-                    horizontalArrangement = Arrangement.Start,
-                    verticalAlignment = Alignment.CenterVertically
-                )
-                {
-                    Image(
-                        painter = painterResource(id = it.photo),
-                        contentDescription = "parking_image",
-                        contentScale = ContentScale.Crop,
-                        modifier = Modifier
-                            .height(150.dp)
-                            .width(200.dp)
-                            .clip(RoundedCornerShape(10.dp))
-                    )
-                    Spacer(modifier = Modifier.width(10.dp))
-                    Column {
-                        Text(text = it.nom, color = Color.White, fontWeight = FontWeight.Bold)
-                        Spacer(modifier = Modifier.height(5.dp))
-                        Text(text = it.capacite, color = Color.White)
-                        Spacer(modifier = Modifier.height(5.dp))
-                        Text(text = it.horaires, color = Color.White)
-                        Spacer(modifier = Modifier.height(5.dp))
-                        Text(text = it.emplacement, color = Color.White)
-                        Spacer(modifier = Modifier.height(5.dp))
-                        Text(text = it.commune, color = Color.White)
-                    }
-                }
-                Spacer(modifier = Modifier.height(10.dp))
-            }
-        }
 
     }
 }

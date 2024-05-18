@@ -12,7 +12,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavHostController
-import com.example.tp_2_exo2.ui.composables.BottomNavigation
+import com.example.tp_2_exo2.ui.composables.BottomNavigationBar
 import com.example.tp_2_exo2.ui.navigation.routes.AuthDestination
 
 
@@ -24,7 +24,7 @@ fun ProfileScreen(
 
     Scaffold(
         bottomBar = {
-            BottomNavigation(navController = navController )
+            BottomNavigationBar(navController = navController )
         }
     ) {
         Column(

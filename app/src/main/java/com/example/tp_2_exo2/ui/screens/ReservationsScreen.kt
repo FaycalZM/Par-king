@@ -25,7 +25,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.example.tp_2_exo2.data.model.ReservationData
-import com.example.tp_2_exo2.ui.composables.BottomNavigation
+import com.example.tp_2_exo2.ui.composables.BottomNavigationBar
 import com.example.tp_2_exo2.ui.navigation.routes.AuthDestination
 
 
@@ -45,7 +45,7 @@ fun ReservationsListScreen(
     else {
         Scaffold(
             bottomBar = {
-                BottomNavigation(navController = navController)
+                BottomNavigationBar(navController = navController)
             }
         ) {
             LazyColumn(

@@ -53,6 +53,18 @@ android {
 }
 
 dependencies {
+
+    // Retrofit
+    implementation("com.squareup.retrofit2:retrofit:2.6.0")
+    implementation ("com.squareup.retrofit2:converter-gson:2.6.0")
+    implementation ("com.google.code.gson:gson:2.8.5")
+    // Coil
+    implementation("io.coil-kt:coil-compose:2.4.0")
+    //Coroutine tests
+    testImplementation ("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.4.2")
+    //MockWebserver
+    testImplementation ("com.squareup.okhttp3:mockwebserver:4.9.1")
+
     implementation ("androidx.room:room-runtime:2.5.0")
     ksp("androidx.room:room-compiler:2.5.0")
     implementation ("androidx.room:room-ktx:2.5.0")
@@ -82,19 +94,6 @@ dependencies {
     debugImplementation 'androidx.compose.ui:ui-tooling'
     debugImplementation 'androidx.compose.ui:ui-test-manifest'
 
-    //implementation 'com.google.firebase:firebase-auth:22.3.1'
-    //implementation 'com.google.android.gms:play-services-auth:21.0.0'
-
-    implementation ('com.google.firebase:firebase-auth:22.3.1') {
-        exclude group: 'com.google.android.libraries.abuse', module: 'recaptcha.common_common_ktx'
-    }
-
-    implementation ('com.google.android.gms:play-services-auth:21.0.0') {
-        exclude group: 'com.google.android.libraries.abuse', module: 'recaptcha.common_common_ktx'
-    }
-
-
     implementation "androidx.lifecycle:lifecycle-viewmodel-compose:2.7.0"
     implementation "androidx.lifecycle:lifecycle-runtime-compose:2.7.0"
-    implementation "io.coil-kt:coil-compose:2.2.2"
 }
