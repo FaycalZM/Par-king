@@ -30,7 +30,7 @@ fun ParkingDetails(parking: ParkingData){
         verticalArrangement = Arrangement.SpaceEvenly
     ) {
         Image(
-            painter = painterResource(id = parking.photo),
+            painter = painterResource(id= com.example.tp_2_exo2.R.drawable.pic5),
             contentDescription = "parking_image",
             contentScale = ContentScale.Crop,
             modifier = Modifier
@@ -43,18 +43,8 @@ fun ParkingDetails(parking: ParkingData){
             horizontalArrangement = Arrangement.SpaceEvenly,
             modifier = Modifier.fillMaxWidth()
         ) {
-            Spacer(modifier = Modifier.height(5.dp))
-            Text(text = parking.nom, fontWeight = FontWeight.Bold, fontSize = 25.sp)
-            Spacer(modifier = Modifier.height(5.dp))
-            Text(text = parking.horaires)
-            Spacer(modifier = Modifier.height(5.dp))
+
         }
-        Text(text = parking.capacite)
-        Spacer(modifier = Modifier.height(5.dp))
-        Text(text = parking.emplacement)
-        Spacer(modifier = Modifier.height(5.dp))
-        Text(text = parking.commune)
-        Spacer(modifier = Modifier.height(5.dp))
-        Text(text = parking.description)
+
     }
 }

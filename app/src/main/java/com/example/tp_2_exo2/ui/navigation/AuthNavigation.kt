@@ -9,6 +9,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.tp_2_exo2.data.model.auth.AuthViewModel
 import com.example.tp_2_exo2.data.model.user.UserModel
+import com.example.tp_2_exo2.data.utils.parkingsList
 import com.example.tp_2_exo2.ui.navigation.routes.AuthDestination
 import com.example.tp_2_exo2.ui.navigation.routes.ParkingDestination
 import com.example.tp_2_exo2.ui.screens.ParkingsListScreen
@@ -71,6 +72,7 @@ fun AuthNavigation(
             ParkingDestination.ParkingsList.route
         ) {
             ParkingsListScreen(
+                parkingsList = parkingsList,
                 navController = navController
             )
         }

@@ -4,12 +4,67 @@ import com.example.tp_2_exo2.R
 import com.example.tp_2_exo2.data.model.ParkingData
 import com.example.tp_2_exo2.data.model.ReservationData
 
-val parkingsList = listOf<ParkingData>(
-    ParkingData(0,"Parking1", "50", "8 AM - 6 PM", "123 Main St", "Cityville", R.drawable.pic3, "This is a description for Parking1."),
-    ParkingData(1,"Parking2", "75", "9 AM - 7 PM", "456 Oak St", "Townsville", R.drawable.pic2, "This is a description for Parking2."),
-    ParkingData(2,"Parking3", "100", "24/7", "789 Pine St", "Metropolis", R.drawable.pic3, "This is a description for Parking3."),
-    ParkingData(3,"Parking4", "30", "7 AM - 5 PM", "101 Elm St", "Villagetown", R.drawable.pic4, "This is a description for Parking4."),
-    ParkingData(4,"Parking5", "80", "10 AM - 8 PM", "202 Maple St", "Suburbia", R.drawable.pic5, "This is a description for Parking5.")
+val parkingsList = listOf(
+    ParkingData(
+        id = 1,
+        name = "Parking 1",
+        description = "Convenient downtown parking with easy access to main attractions easy access to main attractions",
+        wilaya = "Wilaya 1",
+        address = "Address 1",
+        parking_img = "news_1.jpg",
+        localization = "Localization 1",
+        price_per_hour = 10,
+        opening_time = "08:00:00",
+        closing_time = "18:00:00"
+    ),
+    ParkingData(
+        id = 2,
+        name = "Parking 2",
+        description = "Convenient downtown parking with easy access to main attractions",
+        wilaya = "Wilaya 2",
+        address = "Address 2",
+        parking_img = "news_2.jpg",
+        localization = "Localization 2",
+        price_per_hour = 15,
+        opening_time = "09:00:00",
+        closing_time = "19:00:00"
+    ),
+    ParkingData(
+        id = 3,
+        name = "Parking 3",
+        description = "Convenient downtown parking with easy access to main attractions",
+        wilaya = "Wilaya 3",
+        address = "Address 3",
+        parking_img = "news_3.jpg",
+        localization = "Localization 3",
+        price_per_hour = 20,
+        opening_time = "00:00:00",
+        closing_time = "23:59:00"
+    ),
+    ParkingData(
+        id = 4,
+        name = "Parking 4",
+        description = "Convenient downtown parking with easy access to main attractions",
+        wilaya = "Wilaya 4",
+        address = "Address 4",
+        parking_img = "news_4.jpg",
+        localization = "Localization 4",
+        price_per_hour = 5,
+        opening_time = "07:00:00",
+        closing_time = "17:00:00"
+    ),
+    ParkingData(
+        id = 5,
+        name = "Parking 5",
+        description = "Convenient downtown parking with easy access to main attractions",
+        wilaya = "Wilaya 5",
+        address = "Address 5",
+        parking_img = "news_5.jpg",
+        localization = "Localization 5",
+        price_per_hour = 8,
+        opening_time = "10:00:00",
+        closing_time = "20:00:00"
+    )
 )
 
 val reservationsList = listOf<ReservationData>(
