@@ -85,14 +85,13 @@ fun BottomNavigationBar(
 
         HorizontalDivider(
             modifier = Modifier.fillMaxWidth(),
-            thickness = 1.dp,
+            thickness = 2.dp,
             color = Color.Black
         )
         Row(
             modifier = Modifier
-//            .border(BorderStroke(1.dp,SolidColor(Color.Gray)))
-                .padding(start = 10.dp, end = 10.dp, top = 8.dp, bottom = 8.dp)
-                .background(Color.Transparent)
+                .border(BorderStroke(1.dp,SolidColor(Color.Gray)))
+                .background(Color.White)
                 .fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceEvenly,
             verticalAlignment = Alignment.CenterVertically

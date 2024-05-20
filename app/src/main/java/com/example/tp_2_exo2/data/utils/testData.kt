@@ -8,7 +8,7 @@ val parkingsList = listOf(
     ParkingData(
         id = 1,
         name = "Parking 1",
-        description = "Convenient downtown parking with easy access to main attractions easy access to main attractions",
+        description = "Convenient downtown parking with easy access to main attractions easy access to main attractions Convenient downtown parking with easy access to main attractions easy access to main attractions ",
         wilaya = "Wilaya 1",
         address = "Address 1",
         parking_img = "news_1.jpg",
