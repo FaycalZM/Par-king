@@ -2,10 +2,23 @@
 <project version="4">
   <component name="deploymentTargetDropDown">
     <value>
-      <entry key="BottomNavPreview">
-        <State />
+      <entry key="ParkingDetailsPreview">
+        <State>
+          <targetSelectedWithDropDown>
+            <Target>
+              <type value="QUICK_BOOT_TARGET" />
+              <deviceKey>
+                <Key>
+                  <type value="VIRTUAL_DEVICE_PATH" />
+                  <value value="C:\Users\houss\.android\avd\Pixel_2.avd" />
+                </Key>
+              </deviceKey>
+            </Target>
+          </targetSelectedWithDropDown>
+          <timeTargetWasSelectedWithDropDown value="2024-05-20T13:52:17.134021500Z" />
+        </State>
       </entry>
-      <entry key="SignInScreenPreview">
+      <entry key="ParkingsListScreenPreview">
         <State />
       </entry>
       <entry key="app">
