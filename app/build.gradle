@@ -54,6 +54,12 @@ android {
 
 dependencies {
 
+    def appcompat_version = "1.6.1"
+
+    implementation "androidx.appcompat:appcompat:$appcompat_version"
+    // For loading and tinting drawables on older versions of the platform
+    implementation "androidx.appcompat:appcompat-resources:$appcompat_version"
+
     // Retrofit
     implementation("com.squareup.retrofit2:retrofit:2.6.0")
     implementation ("com.squareup.retrofit2:converter-gson:2.6.0")

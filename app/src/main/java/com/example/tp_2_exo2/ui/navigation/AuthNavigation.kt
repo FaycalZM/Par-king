@@ -47,7 +47,7 @@ fun AuthNavigation(
         composable(AuthDestination.SignUp.route) {
             SignUpScreen(
                 navController = navController,
-                userModel = userModel
+                authViewModel = authModel
             )
         }
 

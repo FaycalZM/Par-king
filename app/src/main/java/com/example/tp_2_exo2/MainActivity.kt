@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
@@ -11,8 +12,10 @@ import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.rememberNavController
 import com.example.tp_2_exo2.data.ParkingApplication
+import com.example.tp_2_exo2.data.api.interfaces.AuthApi
 import com.example.tp_2_exo2.data.model.auth.AuthViewModel
 import com.example.tp_2_exo2.data.model.user.UserModel
+import com.example.tp_2_exo2.repository.AuthRepository
 import com.example.tp_2_exo2.ui.navigation.AuthNavigation
 import com.example.tp_2_exo2.ui.theme.TP_2_EXO2Theme
 
@@ -23,9 +26,9 @@ class MainActivity : ComponentActivity() {
         UserModel.Factory(ParkingApplication(applicationContext).userRepository)
     }
 
-    private val authModel:AuthViewModel by viewModels {
-        AuthViewModel.Factory(ParkingApplication(applicationContext).userRepository)
-    }
+    val authApi = AuthApi.createEndpoint()
+    val authRepository by lazy { AuthRepository(authApi) }
+    val authModel = AuthViewModel.Factory(authRepository).create(AuthViewModel::class.java)
 
 
     @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")

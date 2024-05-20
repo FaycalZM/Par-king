@@ -1,56 +1,56 @@
 package com.example.tp_2_exo2.data.model.auth
 
+
 import android.util.Log
-import androidx.compose.material3.SnackbarHost
-import androidx.compose.material3.SnackbarHostState
-import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.viewModelScope
-import com.example.tp_2_exo2.data.model.user.User
-import com.example.tp_2_exo2.data.model.user.UserModel
-import com.example.tp_2_exo2.repository.UserRepository
+import com.example.tp_2_exo2.data.api.types.AuthResponse
+import com.example.tp_2_exo2.repository.AuthRepository
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import okhttp3.RequestBody
+import retrofit2.Response
 
-class AuthViewModel(private val userRepository: UserRepository) : ViewModel() {
+class AuthViewModel(private val authRepository: AuthRepository) : ViewModel() {
+    private val _signupResponse = MutableLiveData<Response<AuthResponse>>()
+    val signupResponse : LiveData<Response<AuthResponse>> get() = _signupResponse
+    val loading = mutableStateOf(false)
+    val error = mutableStateOf<String?>(null)
 
-    private var _loginState = mutableStateOf(AuthState())
-    val loginState : State<AuthState> = _loginState
+    fun signupUser(user: MutableMap<String,RequestBody>) {
+        loading.value = true
+        error.value = null
 
-    fun resetAuthState( ) {
-        _loginState.value = AuthState()
-    }
-    fun signIn(email: String){
-        viewModelScope.launch {
-            _loginState.value = loginState.value.copy(isLoading = true)
-            withContext(Dispatchers.IO) {
-                try {
-                    val user = userRepository.getUserByEmail(email)
-                    withContext(Dispatchers.Main){
-                        if (user != null) {
-                            // user exists
-                            _loginState.value = loginState.value.copy(isLoading = false, responseMsg = "User exists",activeUser = user)
-                        } else { // user not found
-                            _loginState.value = loginState.value.copy(isLoading = false,responseMsg = "User not found")
-                        }
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val response = authRepository.registerUser(user)
+                loading.value = false
+                if (response.isSuccessful) {
+                    withContext(Dispatchers.Main) {
+                        _signupResponse.value = response
                     }
-                } catch (e:Exception) {
-                    Log.e("getUserByEmail(login)", "Database operation failed", e)
+                    Log.d("AuthViewModel", "Register user success: ${response.body()}")
+                } else {
+                    error.value = "Failed to register user: ${response.message()}"
                 }
+            } catch (e:Exception) {
+                Log.e("AuthViewModel", "Register user error", e)
+                error.value = "Failed to register user: ${e.message}"
+            } finally {
+                loading.value = false
             }
         }
     }
 
-
-
-    class Factory(private val userRepository: UserRepository) : ViewModelProvider.Factory {
-        //        @Suppress("UNCHECKED_CAST")
+    class Factory(private val authRepository: AuthRepository) : ViewModelProvider.Factory {
+        @Suppress("UNCHECKED_CAST")
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            return AuthViewModel(userRepository) as T
+            return AuthViewModel(authRepository) as T
         }
     }
 }
