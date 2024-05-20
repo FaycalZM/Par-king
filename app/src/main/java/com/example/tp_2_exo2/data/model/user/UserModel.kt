@@ -44,7 +44,6 @@ class UserModel(private val userRepository: UserRepository): ViewModel() {
                     _signupState.value = signupState.value.copy(isLoading = false, responseMsg = "success")
                 } catch (e:Exception) {
                     _signupState.value = signupState.value.copy(isLoading = false, responseMsg = "Error")
-                    Log.e("addUser(signUp)", "Database operation failed", e)
                 }
             }
         }
