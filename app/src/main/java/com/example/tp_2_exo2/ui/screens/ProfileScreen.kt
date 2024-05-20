@@ -34,12 +34,12 @@ fun ProfileScreen(
         ) {
             val context = LocalContext.current
             val pref = context.getSharedPreferences("my_prefs", Context.MODE_PRIVATE)
-            val email = pref.getString("email" , null)
-            Log.d("Profile Screen", "ProfileScreen: $email ")
-            if (email != null) {
-                Text(text = email)
+            val userId = pref.getString("id" , null)
+            Log.d("Profile Screen", "ProfileScreen: $userId ")
+            if (userId != null) {
+                Text(text = userId)
                 Button(onClick = {
-                    pref.edit().remove("email").apply()
+                    pref.edit().remove("id").apply()
                     navController.navigate(AuthDestination.SignIn.route)
                 }) {
                     Text(text = "Sign out")

@@ -21,7 +21,6 @@ import com.example.tp_2_exo2.ui.screens.SignUpScreen
 fun AuthNavigation(
     navController: NavHostController,
     authModel: AuthViewModel,
-    userModel: UserModel
 ) {
     NavHost(
         navController = navController,
@@ -32,9 +31,9 @@ fun AuthNavigation(
             // if the user is already logged in : go directly to the home screen
             LaunchedEffect(key1 = Unit) {
                 val sharedPreferences = context.getSharedPreferences("my_prefs", Context.MODE_PRIVATE)
-                val email = sharedPreferences.getString("email" , null)
-                if (email != null) {
-                    navController.navigate(ParkingDestination.Profile.route)
+                val userId = sharedPreferences.getString("id" , null)
+                if (userId != null) {
+                    navController.navigate(ParkingDestination.ReservationsList.route)
                 }
             }
 

@@ -33,6 +33,7 @@ import androidx.navigation.NavHostController
 import com.example.tp_2_exo2.R
 import com.example.tp_2_exo2.data.model.auth.AuthViewModel
 import com.example.tp_2_exo2.data.utils.createPartFromString
+import com.example.tp_2_exo2.ui.composables.AddProgress
 import com.example.tp_2_exo2.ui.composables.ButtonComponent
 import com.example.tp_2_exo2.ui.composables.CheckboxComponent
 import com.example.tp_2_exo2.ui.composables.ClickableLoginTextComponent
@@ -42,6 +43,7 @@ import com.example.tp_2_exo2.ui.composables.InputField
 import com.example.tp_2_exo2.ui.composables.NormalTextComponent
 import com.example.tp_2_exo2.ui.composables.PasswordInputField
 import com.example.tp_2_exo2.ui.composables.SignInIconBtn
+import com.example.tp_2_exo2.ui.navigation.routes.ParkingDestination
 import com.example.tp_2_exo2.ui.theme.White
 import okhttp3.RequestBody
 
@@ -143,6 +145,9 @@ fun SignUpScreen(
             signupResponse?.let {
                 if(!it.isSuccessful){
                     Text("Signup failed: ${authViewModel.error.value}", color = Color.Red)
+                } else {
+                    sharedPreferences.edit().putString("id", it.body()?.id.toString()).apply()
+                    navController.navigate(ParkingDestination.ParkingsList.route)
                 }
             }
 
@@ -164,17 +169,5 @@ fun SignUpScreen(
     }
 }
 
-@Composable
-fun AddProgress(authViewModel: AuthViewModel) {
-    val isLoading = authViewModel.loading.value
 
-    if (isLoading) {
-        Box(
-            modifier = Modifier.fillMaxWidth(),
-            contentAlignment = Alignment.Center
-        ) {
-            CircularProgressIndicator()
-        }
-    }
-}
 

@@ -1,6 +1,7 @@
 package com.example.tp_2_exo2.data.api.interfaces
 
 import com.example.tp_2_exo2.data.api.apiConstants
+import com.example.tp_2_exo2.data.api.types.AuthRequest
 import com.example.tp_2_exo2.data.api.types.AuthResponse
 import okhttp3.MultipartBody
 import okhttp3.OkHttpClient
@@ -8,6 +9,7 @@ import okhttp3.RequestBody
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.http.Body
 import retrofit2.http.FieldMap
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.Multipart
@@ -21,9 +23,8 @@ interface AuthApi {
     @POST(apiConstants.REGISTER)
     suspend fun registerUser(@PartMap user:MutableMap<String,RequestBody>):Response<AuthResponse>
 
-    @FormUrlEncoded
     @POST(apiConstants.LOGIN)
-    suspend fun loginUser(@FieldMap credentials:Map<String,String>):Response<AuthResponse>
+    suspend fun loginUser(@Body user: AuthRequest ):Response<AuthResponse>
 
     companion object {
         var endpoint: AuthApi? = null
