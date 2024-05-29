@@ -1,5 +1,6 @@
 package com.example.tp_2_exo2.ui.screens
 
+
 import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -32,32 +33,24 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.tp_2_exo2.data.model.ParkingData
 import com.example.tp_2_exo2.ui.composables.BottomNavigationBar
-import com.example.tp_2_exo2.ui.composables.NormalTextComponent
 import com.example.tp_2_exo2.ui.navigation.routes.ParkingDestination
-import com.example.tp_2_exo2.ui.theme.Primary
-import com.example.tp_2_exo2.ui.theme.Purple80
 import com.example.tp_2_exo2.ui.theme.PurpleGrey40
-import com.example.tp_2_exo2.ui.theme.PurpleGrey80
-import com.example.tp_2_exo2.ui.theme.Secondary
-import com.example.tp_2_exo2.ui.theme.TextColor
 import com.example.tp_2_exo2.ui.theme.poppinsFontFamily
 import com.example.tp_2_exo2.ui.theme.purpleGrey200
-import org.intellij.lang.annotations.JdkConstants.HorizontalAlignment
 
 @Composable
-fun parkingsList(){
+fun ReservationsList(){
     val navController = rememberNavController()
     ParkingsListScreen(com.example.tp_2_exo2.data.utils.parkingsList,navController)
 }
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun ParkingsListScreen(
+fun ReservationsListScreen(
     parkingsList: List<ParkingData>,
     navController: NavHostController
 ) {
@@ -75,8 +68,7 @@ fun ParkingsListScreen(
                 .background(
                     Color.White
                 )
-                .padding(0.dp, 12.dp, 0.dp, 40.dp)
-                .fillMaxWidth()
+                .padding(4.dp, 12.dp, 4.dp, 80.dp)
         ) {
 
             items(parkingsList) {
@@ -108,9 +100,7 @@ fun ParkingsListScreen(
                             .clip(RoundedCornerShape(5.dp))
                     )
                     Spacer(modifier = Modifier.width(10.dp))
-                    Column(
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                    ){
+                    Column{
                         Text(
                             text = it.name,
                             modifier = Modifier
@@ -125,16 +115,8 @@ fun ParkingsListScreen(
                             color = purpleGrey200,
                             textAlign = TextAlign.Center
                         )
-                        Spacer(modifier = Modifier.height(10.dp))
                         Text(
-                            text = it.wilaya,
-                            color = purpleGrey200,
-                            modifier = Modifier.padding(3.dp),
-
-                        )
-                        Spacer(modifier = Modifier.height(5.dp))
-                        Text(
-                            text = it.address,
+                            text = it.description,
                             color = purpleGrey200,
                             modifier = Modifier.padding(3.dp),
 
@@ -149,6 +131,6 @@ fun ParkingsListScreen(
 
 @Preview
 @Composable
-fun ParkingsListScreenPreview() {
-    parkingsList()
+fun ReservationsListScreenPreview() {
+    ReservationsList()
 }

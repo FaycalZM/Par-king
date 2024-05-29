@@ -109,7 +109,9 @@ fun ParkingDetailsScreen(
     var inTime by remember { mutableStateOf("") }
     var outTime by remember { mutableStateOf("") }
     var reservationDate by remember { mutableStateOf("") }
-
+    var inTimeError by remember { mutableStateOf(false) }
+    var outTimeError by remember { mutableStateOf(false) }
+    var reservationDateError by remember { mutableStateOf(false) }
     val showModal: () -> Unit = {
         showDialog = ShowDialog.ReservationDialog
     }
@@ -171,6 +173,15 @@ fun ParkingDetailsScreen(
                             }
                         }
                     )
+                    Spacer(modifier = Modifier.height(10.dp))
+                    if (inTimeError) {
+                        Text(
+                            text = "In-Time is required",
+                            color = Color.Red,
+                            style = TextStyle(fontSize = 12.sp)
+                        )
+                    }
+
                     OutlinedTextField(
                         value = outTime,
                         onValueChange = { outTime = it },
@@ -184,6 +195,14 @@ fun ParkingDetailsScreen(
                             }
                         }
                     )
+                    Spacer(modifier = Modifier.height(10.dp))
+                    if (outTimeError) {
+                    Text(
+                        text = "Out-Time is required",
+                        color = Color.Red,
+                        style = TextStyle(fontSize = 12.sp)
+                    )
+                }
                     OutlinedTextField(
                         value = reservationDate,
                         onValueChange = { reservationDate = it },
@@ -194,18 +213,52 @@ fun ParkingDetailsScreen(
                             }
                         }
                     )
+                    Spacer(modifier = Modifier.height(10.dp))
+                    if (reservationDateError) {
+                        Text(
+                            text = "Reservation Date is required",
+                            color = Color.Red,
+                            style = TextStyle(fontSize = 12.sp)
+                        )
+                    }
                 }
             },
             confirmButton = {
                 Button(
                     onClick = {
-                        showDialog = ShowDialog.None
-                        // Handle your reservation logic here
+                        var valid = true
+
+                        if (inTime.isEmpty()) {
+                            inTimeError = true
+                            valid = false
+                        } else {
+                            inTimeError = false
+                        }
+
+                        if (outTime.isEmpty()) {
+                            outTimeError = true
+                            valid = false
+                        } else {
+                            outTimeError = false
+                        }
+
+                        if (reservationDate.isEmpty()) {
+                            reservationDateError = true
+                            valid = false
+                        } else {
+                            reservationDateError = false
+                        }
+
+                        if (valid) {
+                            showDialog = ShowDialog.None
+                            // Handle your reservation logic here
+                        }
                     }
                 ) {
                     Text("Reserve")
                 }
-            },
+            }
+            ,
             dismissButton = {
                 Button(
                     onClick = {

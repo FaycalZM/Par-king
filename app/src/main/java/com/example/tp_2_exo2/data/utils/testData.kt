@@ -4,6 +4,14 @@ import com.example.tp_2_exo2.R
 import com.example.tp_2_exo2.data.model.ParkingData
 import com.example.tp_2_exo2.data.model.ReservationData
 
+
+val reservationsList = listOf<ReservationData>(
+    ReservationData(0,"Parking1","fayssal"),
+    ReservationData(1,"Parking1","fayssal"),
+    ReservationData(2,"Parking2","fayssal"),
+    ReservationData(3,"Parking3","fayssal"),
+)
+
 val parkingsList = listOf(
     ParkingData(
         id = 1,
@@ -67,9 +75,3 @@ val parkingsList = listOf(
     )
 )
 
-val reservationsList = listOf<ReservationData>(
-    ReservationData(0,"Parking1","fayssal"),
-    ReservationData(1,"Parking1","fayssal"),
-    ReservationData(2,"Parking2","fayssal"),
-    ReservationData(3,"Parking3","fayssal"),
-)
