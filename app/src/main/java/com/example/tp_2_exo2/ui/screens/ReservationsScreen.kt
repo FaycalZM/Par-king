@@ -37,7 +37,7 @@ fun ReservationsListScreen(
 ) {
     val context = LocalContext.current
     val sharedPreferences = context.getSharedPreferences("my_prefs", Context.MODE_PRIVATE)
-    val email = sharedPreferences.getString("email" , null)
+    val email = sharedPreferences.getString("id" , null)
     if (email == null) {
         // user is not authenticated
         navController.navigate(AuthDestination.SignIn.route)
