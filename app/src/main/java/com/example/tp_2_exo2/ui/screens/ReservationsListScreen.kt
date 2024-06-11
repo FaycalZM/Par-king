@@ -46,8 +46,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import coil.compose.rememberImagePainter
 import com.example.tp_2_exo2.data.ViewModels.ParkingViewModel
 import com.example.tp_2_exo2.data.ViewModels.ReservationViewModel
+import com.example.tp_2_exo2.data.api.apiConstants
 import com.example.tp_2_exo2.data.model.ParkingData
 import com.example.tp_2_exo2.data.model.ReservationData
 import com.example.tp_2_exo2.ui.composables.BottomNavigationBar
@@ -124,8 +126,9 @@ fun ReservationsListScreen(
                         verticalAlignment = Alignment.CenterVertically
                     )
                     {
+                        var imageUrl = apiConstants.BASE_URL + apiConstants.GET_QRCODE + "/${reservation.id}"
                         Image(
-                            painter = painterResource(id = com.example.tp_2_exo2.R.drawable.qr_base),
+                            painter = rememberImagePainter(data = imageUrl),
                             contentDescription = "photo de parking",
                             contentScale = ContentScale.Crop,
                             modifier = Modifier
@@ -193,9 +196,10 @@ fun ReservationsListScreen(
                     horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.Center
                 ) {
+                    var imageUrl = apiConstants.BASE_URL + apiConstants.GET_QRCODE + "/${reservation.id}"
                     Image(
-                        painter = painterResource(id = com.example.tp_2_exo2.R.drawable.qr_base),
-                        contentDescription = "QR Code",
+                        painter = rememberImagePainter(data = imageUrl),
+                        contentDescription = "photo de parking",
                         contentScale = ContentScale.Crop,
                         modifier = Modifier
                             .height(200.dp)

@@ -115,8 +115,6 @@ fun AuthNavigation(
             )
         }
         composable(
-
-        composable(
             ParkingDestination.Cart.route
         ) {
             MapScreen(
