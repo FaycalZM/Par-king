@@ -3,7 +3,6 @@ package com.example.tp_2_exo2.ui.navigation
 import android.content.Context
 import android.util.Log
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
@@ -17,6 +16,7 @@ import com.example.tp_2_exo2.data.utils.parkingsList
 import com.example.tp_2_exo2.data.utils.reservationsList
 import com.example.tp_2_exo2.ui.navigation.routes.AuthDestination
 import com.example.tp_2_exo2.ui.navigation.routes.ParkingDestination
+import com.example.tp_2_exo2.ui.screens.MapScreen
 import com.example.tp_2_exo2.ui.screens.ParkingsListScreen
 import com.example.tp_2_exo2.ui.screens.ProfileScreen
 import com.example.tp_2_exo2.ui.screens.ReservationsListScreen
@@ -100,5 +100,12 @@ fun AuthNavigation(
             ParkingDetailsScreen(parking = parkingsList[0], navController = navController )
         }
 
+            ParkingDestination.Cart.route
+        ) {
+            MapScreen(
+               parkingsList = parkingsList,
+               navController= navController
+            )
+        }
     }
 }

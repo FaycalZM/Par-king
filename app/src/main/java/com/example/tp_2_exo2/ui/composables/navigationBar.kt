@@ -75,7 +75,8 @@ fun BottomNavigationBar(
     val items = listOf(
         BottomNavItem.Home,
         BottomNavItem.List,
-        BottomNavItem.Profile
+        BottomNavItem.Profile,
+        BottomNavItem.Cart
     )
 
 

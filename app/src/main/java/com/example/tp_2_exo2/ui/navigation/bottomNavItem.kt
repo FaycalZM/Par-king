@@ -32,4 +32,12 @@ sealed class BottomNavItem(
             R.drawable.ic_bottom_profile_focused,
             ParkingDestination.Profile.route
         )
+
+    object Cart :
+        BottomNavItem(
+            "Cart",
+            R.drawable.ic_bottom_cart,
+            R.drawable.ic_bottom_cart,
+            ParkingDestination.Cart.route
+        )
 }

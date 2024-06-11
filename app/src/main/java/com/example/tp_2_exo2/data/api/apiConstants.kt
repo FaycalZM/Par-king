@@ -2,7 +2,9 @@ package com.example.tp_2_exo2.data.api
 
 object apiConstants {
     // Backend Base URL
-    const val BASE_URL = "https://330a-105-235-130-29.ngrok-free.app/"
+
+    const val BASE_URL = "http://5695-154-121-85-21.ngrok-free.app/"
+
     // Endpoints
     const val REGISTER = "registerUser"
     const val LOGIN = "login"
