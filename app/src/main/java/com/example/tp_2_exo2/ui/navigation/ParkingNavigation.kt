@@ -7,6 +7,9 @@ import androidx.navigation.compose.composable
 import com.example.tp_2_exo2.data.model.ParkingData
 import com.example.tp_2_exo2.data.model.ReservationData
 import com.example.tp_2_exo2.ui.screens.ProfileScreen
+
+import com.example.tp_2_exo2.data.utils.parkingsList
+import com.example.tp_2_exo2.data.utils.reservationsList
 import com.example.tp_2_exo2.ui.composables.ParkingDetails
 import com.example.tp_2_exo2.ui.navigation.routes.ParkingDestination
 import com.example.tp_2_exo2.ui.screens.ParkingsListScreen
@@ -30,6 +33,8 @@ fun ParkingNavigation(
             ParkingDestination.ReservationsList.route
         ) {
             ReservationsListScreen(
+                parkingsList = parkingsList,
+                reservationList = reservationsList,
                 navController = navController
             )
         }
@@ -38,6 +43,7 @@ fun ParkingNavigation(
             ParkingDestination.ParkingsList.route
         ) {
             ParkingsListScreen(
+                parkingsList = parkingsList,
                 navController = navController
             )
         }

@@ -10,6 +10,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.tp_2_exo2.data.model.auth.AuthViewModel
 import com.example.tp_2_exo2.data.model.user.UserModel
+import com.example.tp_2_exo2.data.utils.parkingsList
+import com.example.tp_2_exo2.data.utils.reservationsList
 import com.example.tp_2_exo2.ui.navigation.routes.AuthDestination
 import com.example.tp_2_exo2.ui.navigation.routes.ParkingDestination
 import com.example.tp_2_exo2.ui.screens.ParkingsListScreen
@@ -67,23 +69,18 @@ fun AuthNavigation(
         composable(
             ParkingDestination.ReservationsList.route
         ) {
-            val context = LocalContext.current
-            val sharedPreferences = context.getSharedPreferences("my_prefs", Context.MODE_PRIVATE)
-            val userId = sharedPreferences.getString("id" , null)
-            if (userId == null) {
-                // user is not authenticated
-                navController.navigate(AuthDestination.SignIn.route)
-            } else {
-                ReservationsListScreen(
-                    navController = navController
-                )
-            }
+            ReservationsListScreen(
+                parkingsList = parkingsList,
+                reservationList = reservationsList,
+                navController = navController
+            )
         }
 
         composable(
             ParkingDestination.ParkingsList.route
         ) {
             ParkingsListScreen(
+                parkingsList = parkingsList,
                 navController = navController
             )
         }
