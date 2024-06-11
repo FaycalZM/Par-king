@@ -87,7 +87,7 @@ fun ParkingsListScreen(
                     .padding(0.dp, 12.dp, 0.dp, 40.dp)
                     .fillMaxWidth()
             ) {
-                items(parkingsList!!) {parking->
+                items(parkingsList) {parking->
                     Row(
                         modifier = Modifier
                             .clip(RoundedCornerShape(10.dp))

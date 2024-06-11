@@ -3,6 +3,7 @@ package com.example.tp_2_exo2.ui.screens
 import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -252,6 +253,7 @@ fun ParkingDetailsScreen(
                         if (valid) {
                             showDialog = ShowDialog.None
                             // Handle your reservation logic here
+                            Log.d("Reservation", "ParkingDetailsScreen: $reservationDate $inTime $outTime ")
                         }
                     }
                 ) {
