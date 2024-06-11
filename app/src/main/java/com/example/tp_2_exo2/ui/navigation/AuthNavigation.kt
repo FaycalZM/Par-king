@@ -5,8 +5,12 @@ import android.util.Log
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.navArgument
+import com.example.tp_2_exo2.data.ViewModels.ParkingViewModel
+import com.example.tp_2_exo2.data.api.interfaces.ParkingApi
 import com.example.tp_2_exo2.data.model.auth.AuthViewModel
 import com.example.tp_2_exo2.data.utils.parkingsList
 import com.example.tp_2_exo2.data.utils.reservationsList
@@ -18,12 +22,18 @@ import com.example.tp_2_exo2.ui.screens.ProfileScreen
 import com.example.tp_2_exo2.ui.screens.ReservationsListScreen
 import com.example.tp_2_exo2.ui.screens.SignInScreen
 import com.example.tp_2_exo2.ui.screens.SignUpScreen
+import com.example.tp_2_exo2.repository.ParkingRepository
+import com.example.tp_2_exo2.ui.screens.ParkingDetailsScreen
 
 @Composable
 fun AuthNavigation(
     navController: NavHostController,
     authModel: AuthViewModel,
 ) {
+    val parkingApi = ParkingApi.createEndpoint()
+    val parkingRepository by lazy { ParkingRepository(parkingApi) }
+    val parkingViewModel = ParkingViewModel.Factory(parkingRepository).create(ParkingViewModel::class.java)
+
     NavHost(
         navController = navController,
         startDestination = AuthDestination.SignIn.route
@@ -79,12 +89,17 @@ fun AuthNavigation(
             ParkingDestination.ParkingsList.route
         ) {
             ParkingsListScreen(
-                parkingsList = parkingsList,
+                parkingViewModel = parkingViewModel,
                 navController = navController
             )
         }
 
         composable(
+            ParkingDestination.ParkingDetails.route
+        ){
+            ParkingDetailsScreen(parking = parkingsList[0], navController = navController )
+        }
+
             ParkingDestination.Cart.route
         ) {
             MapScreen(
