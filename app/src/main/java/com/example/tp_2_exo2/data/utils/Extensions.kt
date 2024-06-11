@@ -58,3 +58,18 @@ fun createRequestBodyFromUri(context: Context, uri: Uri): RequestBody? {
         null
     }
 }
+
+fun splitLatLong(latLong: String): Pair<Double, Double> {
+    val parts = latLong.split(",")
+    if (parts.size != 2) {
+        throw IllegalArgumentException("Input string is not in the correct format: $latLong")
+    }
+    val latitude = parts[0].trim().toDoubleOrNull()
+    val longitude = parts[1].trim().toDoubleOrNull()
+
+    if (latitude == null || longitude == null) {
+        throw IllegalArgumentException("Latitude or longitude is not a valid number: $latLong")
+    }
+
+    return Pair(latitude, longitude)
+}
