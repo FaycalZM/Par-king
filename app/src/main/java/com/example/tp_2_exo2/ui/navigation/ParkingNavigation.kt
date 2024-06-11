@@ -18,13 +18,13 @@ fun ParkingNavigation(
 )
 {
     NavHost(navController = navController, startDestination = ParkingDestination.Profile.route){
-        composable(
-            ParkingDestination.Profile.route
-        ){
-            ProfileScreen(
-                navController = navController,
-            )
-        }
+//        composable(
+//            ParkingDestination.Profile.route
+//        ){
+//            ProfileScreen(
+//                navController = navController,
+//            )
+//        }
 
         composable(
             ParkingDestination.ReservationsList.route

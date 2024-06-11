@@ -35,14 +35,6 @@ fun ReservationsListScreen(
     navController: NavHostController,
     reservationsList: List<ReservationData> = emptyList<ReservationData>(),
 ) {
-    val context = LocalContext.current
-    val sharedPreferences = context.getSharedPreferences("my_prefs", Context.MODE_PRIVATE)
-    val email = sharedPreferences.getString("id" , null)
-    if (email == null) {
-        // user is not authenticated
-        navController.navigate(AuthDestination.SignIn.route)
-    }
-    else {
         Scaffold(
             bottomBar = {
                 BottomNavigationBar(navController = navController)
@@ -80,6 +72,6 @@ fun ReservationsListScreen(
                 }
             }
         }
-    }
+
 
 }
