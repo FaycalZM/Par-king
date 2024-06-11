@@ -114,12 +114,13 @@ fun AuthNavigation(
                 parkingId = id!!.toInt()
             )
         }
+        composable(
 
         composable(
             ParkingDestination.Cart.route
         ) {
             MapScreen(
-               parkingsList = parkingsList,
+               parkingViewModel = parkingViewModel,
                navController= navController
             )
         }
