@@ -2,6 +2,7 @@ package com.example.tp_2_exo2.ui.screens
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.SharedPreferences
 import android.util.Log
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Button
@@ -19,7 +20,9 @@ import com.example.tp_2_exo2.ui.navigation.routes.AuthDestination
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun ProfileScreen(
-    navController: NavHostController
+    navController: NavHostController,
+    userId : String?,
+    sharedPreferences: SharedPreferences
 ) {
 
     Scaffold(
@@ -32,16 +35,15 @@ fun ProfileScreen(
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            val context = LocalContext.current
-            val pref = context.getSharedPreferences("my_prefs", Context.MODE_PRIVATE)
-            val userId = pref.getString("id" , null)
             Log.d("Profile Screen", "ProfileScreen: $userId ")
             if (userId != null) {
                 Text(text = userId)
-                Button(onClick = {
-                    pref.edit().remove("id").apply()
+                Button(
+                    onClick = {
+                    sharedPreferences.edit().remove("id").apply()
                     navController.navigate(AuthDestination.SignIn.route)
-                }) {
+                }
+                ) {
                     Text(text = "Sign out")
                 }
             }

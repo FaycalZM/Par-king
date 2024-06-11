@@ -28,13 +28,13 @@ fun ParkingNavigation(
     val parkingViewModel = ParkingViewModel.Factory(parkingRepository).create(ParkingViewModel::class.java)
 
     NavHost(navController = navController, startDestination = ParkingDestination.Profile.route){
-        composable(
-            ParkingDestination.Profile.route
-        ){
-            ProfileScreen(
-                navController = navController,
-            )
-        }
+//        composable(
+//            ParkingDestination.Profile.route
+//        ){
+//            ProfileScreen(
+//                navController = navController,
+//            )
+//        }
 
         composable(
             ParkingDestination.ReservationsList.route

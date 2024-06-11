@@ -1,8 +1,7 @@
 package com.example.tp_2_exo2.ui.navigation
 
 import android.content.Context
-import android.os.Build
-import androidx.annotation.RequiresApi
+import android.util.Log
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.platform.LocalContext
@@ -40,14 +39,13 @@ fun AuthNavigation(
         startDestination = AuthDestination.SignIn.route
     ) {
         composable(AuthDestination.SignIn.route) {
+
             val context = LocalContext.current
-            // if the user is already logged in : go directly to the home screen
-            LaunchedEffect(key1 = Unit) {
-                val sharedPreferences = context.getSharedPreferences("my_prefs", Context.MODE_PRIVATE)
-                val userId = sharedPreferences.getString("id" , null)
-                if (userId != null) {
-                    navController.navigate(ParkingDestination.ReservationsList.route)
-                }
+            val sharedPreferences = context.getSharedPreferences("my_prefs", Context.MODE_PRIVATE)
+
+            val userId = sharedPreferences.getString("id" , null)
+            if (userId != null) {
+                navController.navigate(ParkingDestination.Profile.route)
             }
 
             SignInScreen(
@@ -66,8 +64,14 @@ fun AuthNavigation(
         composable(
             ParkingDestination.Profile.route
         ){
+            val context = LocalContext.current
+            val pref = context.getSharedPreferences("my_prefs", Context.MODE_PRIVATE)
+            val userId = pref.getString("id" , null)
+            Log.d("navigation", "ProfileScreen: $userId ")
             ProfileScreen(
                 navController = navController,
+                userId = userId,
+                sharedPreferences = pref
             )
         }
 
