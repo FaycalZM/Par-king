@@ -95,9 +95,17 @@ fun AuthNavigation(
         }
 
         composable(
-            ParkingDestination.ParkingDetails.route
+                "ParkingDetailsScreen/{ParkingId}",
+                    arguments = listOf(navArgument("ParkingId") { type = NavType.IntType }
+            )
         ){
-            ParkingDetailsScreen(parking = parkingsList[0], navController = navController )
+                backStackEntry ->
+            val id = backStackEntry.arguments?.getInt("ParkingId")
+            ParkingDetailsScreen(
+                parkingViewModel = parkingViewModel,
+                navController = navController,
+                parkingId = id!!.toInt()
+            )
         }
 
     }

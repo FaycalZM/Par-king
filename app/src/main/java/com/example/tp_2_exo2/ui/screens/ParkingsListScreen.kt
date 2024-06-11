@@ -97,9 +97,7 @@ fun ParkingsListScreen(
                             .padding(10.dp)
                             .clickable {
                                 navController.navigate(
-                                    ParkingDestination.ParkingDetails.createRoute(
-                                        parking.id
-                                    )
+                                    "ParkingDetailsScreen/${parking.id}"
                                 )
                             },
                         horizontalArrangement = Arrangement.Start,

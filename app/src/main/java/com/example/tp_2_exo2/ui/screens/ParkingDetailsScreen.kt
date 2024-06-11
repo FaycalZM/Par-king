@@ -43,7 +43,9 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarColors
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -67,6 +69,7 @@ import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.tp_2_exo2.R
+import com.example.tp_2_exo2.data.ViewModels.ParkingViewModel
 import com.example.tp_2_exo2.data.model.ParkingData
 import com.example.tp_2_exo2.ui.composables.BottomNavigationBar
 import com.example.tp_2_exo2.ui.composables.ButtonComponent
@@ -85,11 +88,6 @@ import com.example.tp_2_exo2.ui.theme.purpleGrey200
 import org.intellij.lang.annotations.JdkConstants.HorizontalAlignment
 import java.util.Calendar
 
-@Composable
-fun parkingDetails(){
-    val navController = rememberNavController()
-    ParkingDetailsScreen(com.example.tp_2_exo2.data.utils.parkingsList.get(0),navController)
-}
 
 enum class ShowDialog {
     None,
@@ -102,8 +100,9 @@ enum class ShowDialog {
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun ParkingDetailsScreen(
-    parking: ParkingData,
-    navController: NavHostController
+    parkingViewModel : ParkingViewModel,
+    navController: NavHostController,
+    parkingId: Int?
 ) {
     var showDialog by remember { mutableStateOf(ShowDialog.None) }
     var inTime by remember { mutableStateOf("") }
@@ -115,6 +114,14 @@ fun ParkingDetailsScreen(
     val showModal: () -> Unit = {
         showDialog = ShowDialog.ReservationDialog
     }
+    val allParkingsResponse by parkingViewModel.allParkingsResponse.observeAsState()
+    LaunchedEffect(Unit) {
+        parkingViewModel.getAllParkings()
+    }
+    var parkingsList: List<ParkingData>? = allParkingsResponse?.body()
+
+    //get the parking id from the nav
+    val parking = parkingsList?.get(parkingId!! - 1)
 
     val calendar = Calendar.getInstance()
 
@@ -213,6 +220,7 @@ fun ParkingDetailsScreen(
                             }
                         }
                     )
+
                     Spacer(modifier = Modifier.height(10.dp))
                     if (reservationDateError) {
                         Text(
@@ -324,7 +332,7 @@ fun ParkingDetailsScreen(
                     ) {
                         Spacer(modifier = Modifier.height(10.dp))
                         Text(
-                            text = parking.name,
+                            text = parking!!.name,
                             modifier = Modifier
                                 .heightIn(min = 20.dp),
                             style = TextStyle(
@@ -467,7 +475,7 @@ fun ParkingDetailsScreen(
                 }
 
                 Text(
-                    text = parking.description,
+                    text = parking!!.description,
                     modifier = Modifier
                         .padding(10.dp),
 
@@ -514,9 +522,3 @@ fun ParkingDetailsScreen(
     }
 }
 
-
-@Preview
-@Composable
-fun ParkingDetailsPreview() {
-    parkingDetails()
-}
