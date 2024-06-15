@@ -1,6 +1,7 @@
 package com.example.tp_2_exo2.ui.screens
 
 import android.annotation.SuppressLint
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -38,7 +39,9 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import coil.compose.rememberImagePainter
 import com.example.tp_2_exo2.data.ViewModels.ParkingViewModel
+import com.example.tp_2_exo2.data.api.apiConstants
 import com.example.tp_2_exo2.data.model.ParkingData
 import com.example.tp_2_exo2.data.model.parking.Parking
 import com.example.tp_2_exo2.ui.composables.BottomNavigationBar
@@ -104,8 +107,10 @@ fun ParkingsListScreen(
                         verticalAlignment = Alignment.CenterVertically
                     )
                     {
+                        var imageUrl = apiConstants.BASE_URL + apiConstants.GETPARKINGIMAGE + "/${parking.id}"
+                        Log.d("ParkingsListScreen", "Loading image from URL: $imageUrl")
                         Image(
-                            painter = painterResource(id = com.example.tp_2_exo2.R.drawable.pic5),
+                            painter = rememberImagePainter(data = imageUrl),
                             contentDescription = "photo de parking",
                             contentScale = ContentScale.Crop,
                             modifier = Modifier

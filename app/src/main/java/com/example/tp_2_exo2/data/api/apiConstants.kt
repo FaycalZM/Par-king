@@ -12,7 +12,9 @@ object apiConstants {
     // parkings endpoints
     const val GETALLPARKINGS = "parkingsList"
     const val GETPARKING = "parking"
+    const val GETPARKINGIMAGE = "parkingImage"
 
     const val GET_RESERVATIONS = "userReservations"
     const val CREATE_RESERVATION = "createReservation"
+    const val GET_QRCODE = "qrCode"
 }

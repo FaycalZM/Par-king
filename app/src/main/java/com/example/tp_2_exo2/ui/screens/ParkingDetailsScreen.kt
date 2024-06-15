@@ -70,8 +70,10 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import coil.compose.rememberImagePainter
 import com.example.tp_2_exo2.R
 import com.example.tp_2_exo2.data.ViewModels.ParkingViewModel
+import com.example.tp_2_exo2.data.api.apiConstants
 import com.example.tp_2_exo2.data.ViewModels.ReservationViewModel
 import com.example.tp_2_exo2.data.api.types.ReservationRequest
 import com.example.tp_2_exo2.data.model.ParkingData
@@ -322,8 +324,9 @@ fun ParkingDetailsScreen(
                 .verticalScroll(rememberScrollState()),
         ) {
             Spacer(modifier = Modifier.height(50.dp))
+            var imageUrl = apiConstants.BASE_URL + apiConstants.GETPARKINGIMAGE + "/${parking?.id}"
             Image(
-                painter = painterResource(id = R.drawable.pic5),
+                painter = rememberImagePainter(data = imageUrl),
                 contentDescription = null,
                 modifier = Modifier
                     .height(250.dp)
