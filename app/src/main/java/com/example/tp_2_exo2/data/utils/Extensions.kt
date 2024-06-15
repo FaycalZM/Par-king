@@ -6,6 +6,8 @@ import android.database.Cursor
 import android.net.Uri
 import android.provider.MediaStore
 import androidx.activity.result.ActivityResultLauncher
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.platform.LocalContext
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -72,4 +74,13 @@ fun splitLatLong(latLong: String): Pair<Double, Double> {
     }
 
     return Pair(latitude, longitude)
+}
+
+@Composable
+fun getUserIdFromSharedPreferences(): String? {
+    val context = LocalContext.current
+    val sharedPreferences = context.getSharedPreferences("my_prefs", Context.MODE_PRIVATE)
+
+    val userId = sharedPreferences.getString("id" , null)
+    return userId
 }

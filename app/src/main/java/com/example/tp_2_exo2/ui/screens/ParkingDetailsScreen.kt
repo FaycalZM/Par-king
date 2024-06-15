@@ -3,6 +3,7 @@ package com.example.tp_2_exo2.ui.screens
 import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
+import android.content.Context
 import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -73,7 +74,10 @@ import coil.compose.rememberImagePainter
 import com.example.tp_2_exo2.R
 import com.example.tp_2_exo2.data.ViewModels.ParkingViewModel
 import com.example.tp_2_exo2.data.api.apiConstants
+import com.example.tp_2_exo2.data.ViewModels.ReservationViewModel
+import com.example.tp_2_exo2.data.api.types.ReservationRequest
 import com.example.tp_2_exo2.data.model.ParkingData
+import com.example.tp_2_exo2.data.utils.getUserIdFromSharedPreferences
 import com.example.tp_2_exo2.ui.composables.BottomNavigationBar
 import com.example.tp_2_exo2.ui.composables.ButtonComponent
 import com.example.tp_2_exo2.ui.composables.NormalTextComponent
@@ -104,6 +108,7 @@ enum class ShowDialog {
 @Composable
 fun ParkingDetailsScreen(
     parkingViewModel : ParkingViewModel,
+    reservationViewModel: ReservationViewModel,
     navController: NavHostController,
     parkingId: Int?
 ) {
@@ -111,12 +116,14 @@ fun ParkingDetailsScreen(
     var inTime by remember { mutableStateOf("") }
     var outTime by remember { mutableStateOf("") }
     var reservationDate by remember { mutableStateOf("") }
+    val userId = getUserIdFromSharedPreferences()
     var inTimeError by remember { mutableStateOf(false) }
     var outTimeError by remember { mutableStateOf(false) }
     var reservationDateError by remember { mutableStateOf(false) }
     val showModal: () -> Unit = {
         showDialog = ShowDialog.ReservationDialog
     }
+//    Get all parkings
     val allParkingsResponse by parkingViewModel.allParkingsResponse.observeAsState()
     LaunchedEffect(Unit) {
         parkingViewModel.getAllParkings()
@@ -131,7 +138,7 @@ fun ParkingDetailsScreen(
     val datePickerDialog = DatePickerDialog(
         LocalContext.current,
         { _, year, month, dayOfMonth ->
-            reservationDate = "$dayOfMonth/${month + 1}/$year"
+            reservationDate = String.format("%04d-%02d-%02d", year, month + 1, dayOfMonth)
         },
         calendar.get(Calendar.YEAR),
         calendar.get(Calendar.MONTH),
@@ -141,7 +148,7 @@ fun ParkingDetailsScreen(
     val inTimePickerDialog = TimePickerDialog(
         LocalContext.current,
         { _, hourOfDay, minute ->
-            inTime = String.format("%02d:%02d", hourOfDay, minute)
+            inTime = String.format("%02d:%02d:%02d", hourOfDay, minute, 0)
             showDialog = ShowDialog.ReservationDialog
         },
         calendar.get(Calendar.HOUR_OF_DAY),
@@ -152,7 +159,7 @@ fun ParkingDetailsScreen(
     val outTimePickerDialog = TimePickerDialog(
         LocalContext.current,
         { _, hourOfDay, minute ->
-            outTime = String.format("%02d:%02d", hourOfDay, minute)
+            outTime = String.format("%02d:%02d:%02d", hourOfDay, minute, 0)
             showDialog = ShowDialog.ReservationDialog
         },
         calendar.get(Calendar.HOUR_OF_DAY),
@@ -262,8 +269,16 @@ fun ParkingDetailsScreen(
 
                         if (valid) {
                             showDialog = ShowDialog.None
-                            // Handle your reservation logic here
+                            // Handle reservation logic here
                             Log.d("Reservation", "ParkingDetailsScreen: $reservationDate $inTime $outTime ")
+                            val reservationRequest = ReservationRequest(
+                                user_id = userId!!.toInt(),
+                                parking_id = parkingId!!,
+                                date = reservationDate,
+                                in_time = inTime,
+                                out_time = outTime
+                            )
+                            reservationViewModel.createReservation(reservationRequest)
                         }
                     }
                 ) {
