@@ -110,11 +110,11 @@ fun AuthNavigation(
             val id = backStackEntry.arguments?.getInt("ParkingId")
             ParkingDetailsScreen(
                 parkingViewModel = parkingViewModel,
+                reservationViewModel = reservationViewModel,
                 navController = navController,
                 parkingId = id!!.toInt()
             )
         }
-        composable(
 
         composable(
             ParkingDestination.Cart.route
